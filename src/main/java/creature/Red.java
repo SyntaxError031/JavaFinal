@@ -13,4 +13,8 @@ public class Red extends Good {
     public Image getImage() {
         return new Image("1.png");
     }
+
+    public String toString() {
+        return "大娃";
+    }
 }

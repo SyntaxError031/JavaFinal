@@ -6,37 +6,34 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane alignment="center" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-          styleClass="background" stylesheets="@sample.css"
-          xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
+<GridPane fx:id="pane" alignment="center" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress" styleClass="background" stylesheets="@sample.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
 
-    <VBox alignment="center" prefHeight="700" prefWidth="100" spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="0" >
+    <VBox alignment="center" focusTraversable="true" prefHeight="700" prefWidth="100" spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="0">
         <Label text="葫芦娃阵形" />
-        <Button text="长蛇" onAction="#goodChangShe"/>
-        <Button text="冲轭" onAction="#goodChongE"/>
-        <Button text="方円" onAction="#goodFangYuan"/>
-        <Button text="锋矢" onAction="#goodFengShi"/>
+        <Button focusTraversable="false" onAction="#goodChangShe" text="长蛇" />
+        <Button focusTraversable="false" onAction="#goodChongE" text="冲轭" />
+        <Button focusTraversable="false" onAction="#goodFangYuan" text="方円" />
+        <Button focusTraversable="false" onAction="#goodFengShi" text="锋矢" />
     </VBox>
 
-    <Canvas fx:id="canvas" GridPane.rowIndex="0"  GridPane.columnIndex="1" height="700" width="935">
+    <Canvas fx:id="canvas" focusTraversable="true" height="700" width="935" GridPane.columnIndex="1" GridPane.rowIndex="0">
 
     </Canvas>
 
 
-    <VBox alignment="center" prefHeight="700" prefWidth="100" spacing="20" GridPane.columnIndex="2" GridPane.rowIndex="0">
+    <VBox alignment="center" focusTraversable="true" prefHeight="700" prefWidth="100" spacing="20" GridPane.columnIndex="2" GridPane.rowIndex="0">
         <Label text="妖怪阵形" />
-        <Button text="长蛇" onAction="#badChangShe"/>
-        <Button text="冲轭" onAction="#badChongE"/>
-        <Button text="方円" onAction="#badFangYuan"/>
-        <Button text="锋矢" onAction="#badFengShi"/>
+        <Button focusTraversable="false" onAction="#badChangShe" text="长蛇" />
+        <Button focusTraversable="false" onAction="#badChongE" text="冲轭" />
+        <Button focusTraversable="false" onAction="#badFangYuan" text="方円" />
+        <Button focusTraversable="false" onAction="#badFengShi" text="锋矢" />
     </VBox>
    <columnConstraints>
-       <ColumnConstraints maxWidth="493" minWidth="100.0" prefWidth="100" hgrow="SOMETIMES"/>
-       <ColumnConstraints maxWidth="935" minWidth="85.0" prefWidth="935" hgrow="SOMETIMES"/>
-       <ColumnConstraints maxWidth="493" minWidth="100.0" prefWidth="100" hgrow="SOMETIMES"/>
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="493" minWidth="100.0" prefWidth="100" />
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="935" minWidth="85.0" prefWidth="935" />
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="493" minWidth="100.0" prefWidth="100" />
    </columnConstraints>
    <rowConstraints>
        <RowConstraints maxHeight="1030" minHeight="100" prefHeight="700.0" vgrow="SOMETIMES" />

@@ -13,4 +13,8 @@ public class Orange extends Good {
     public Image getImage() {
         return new Image("2.png");
     }
+
+    public String toString() {
+        return "二娃";
+    }
 }

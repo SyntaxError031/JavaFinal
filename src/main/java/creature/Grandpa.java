@@ -13,4 +13,8 @@ public class Grandpa extends Good {
     public Image getImage() {
         return new Image("grandpa.png");
     }
+
+    public String toString() {
+        return "爷爷";
+    }
 }

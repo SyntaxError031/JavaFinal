@@ -13,4 +13,8 @@ public class Indigo extends Good {
     public Image getImage() {
         return new Image("5.png");
     }
+
+    public String toString() {
+        return "五娃";
+    }
 }

@@ -12,4 +12,8 @@ public class Snake extends Bad {
     public Image getImage() {
         return new Image("snake.png");
     }
+
+    public String toString() {
+        return "蛇精";
+    }
 }

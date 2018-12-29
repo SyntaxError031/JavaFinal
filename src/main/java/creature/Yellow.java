@@ -13,4 +13,8 @@ public class Yellow extends Good {
     public Image getImage() {
         return new Image("3.png");
     }
+
+    public String toString() {
+        return "三娃";
+    }
 }

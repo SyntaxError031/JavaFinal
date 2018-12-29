@@ -13,4 +13,8 @@ public class Green extends Good {
     public Image getImage() {
         return new Image("4.png");
     }
+
+    public String toString() {
+        return "四娃";
+    }
 }

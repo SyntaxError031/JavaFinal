@@ -13,4 +13,8 @@ public class Blue extends Good {
     public Image getImage() {
         return new Image("6.png");
     }
+
+    public String toString() {
+        return "六娃";
+    }
 }

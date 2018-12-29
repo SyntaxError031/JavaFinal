@@ -3,8 +3,10 @@ package space;
 import creature.Bad;
 import creature.Creature;
 import creature.Good;
+import creature.Status;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 public class BattleField {
 
@@ -28,12 +30,16 @@ public class BattleField {
 
     public void drawBattleField(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         Creature creatureInblock;
         for(int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if ((creatureInblock = blocks[i][j].getCreature()) != null) {
                     //System.out.println("draw image on " + i + " " + j);
-                    gc.drawImage(creatureInblock.getImage(), j * BLOCK_SIZE, i * BLOCK_SIZE);
+                    if (creatureInblock.getStatus() != Status.DEAD)
+                        gc.drawImage(creatureInblock.getImage(), j * BLOCK_SIZE, i * BLOCK_SIZE);
+                    else
+                        gc.drawImage(new Image("grave.png"), j * BLOCK_SIZE, i * BLOCK_SIZE);
                 }
             }
         }
@@ -46,19 +52,28 @@ public class BattleField {
     public void clearBattleField(int way) {
         for(int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
+                Creature creatureInBlock = blocks[i][j].getCreature();
                 switch (way) {
                     case 0: {
-                        if (blocks[i][j].getCreature() instanceof Good) {
+                        if (creatureInBlock instanceof Good) {
                             blocks[i][j].eraseCreature();
                             //System.out.println("erase Good on " + i + " " + j);
+                            creatureInBlock.setX(-1);
+                            creatureInBlock.setY(-1);
                         }
                     } break;
                     case 1: {
-                        if (blocks[i][j].getCreature() instanceof Bad)
+                        if (creatureInBlock instanceof Bad) {
                             blocks[i][j].eraseCreature();
+                            creatureInBlock.setX(-1);
+                            creatureInBlock.setY(-1);
+                        }
                     } break;
-                    case 2:
-                        blocks[i][j].eraseCreature(); break;
+                    case 2: {
+                        blocks[i][j].eraseCreature();
+                        creatureInBlock.setX(-1);
+                        creatureInBlock.setY(-1);
+                    } break;
                 }
             }
         }
@@ -66,5 +81,15 @@ public class BattleField {
 
     public void setCreature(Creature creature, int x, int y) {
         blocks[y][x].putCreature(creature);
+        creature.setX(x);
+        creature.setY(y);
+    }
+
+    public Creature getCreature(int x, int y) {
+        return blocks[y][x].getCreature();
+    }
+
+    public void eraseCreature(int x, int y) {
+        blocks[y][x].eraseCreature();
     }
 }

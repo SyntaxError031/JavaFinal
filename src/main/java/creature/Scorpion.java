@@ -12,4 +12,8 @@ public class Scorpion extends Bad {
     public Image getImage() {
         return new Image("scorpion.png");
     }
+
+    public String toString() {
+        return "蝎子";
+    }
 }
