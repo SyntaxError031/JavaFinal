@@ -89,7 +89,7 @@ public class BattleField {
         }
 
         try {
-            File file = new File("game.log");
+            file = new File("game.log");
             if (!file.exists())
                 file.createNewFile();
             FileWriter fileWriter = new FileWriter(file.getName(),true);

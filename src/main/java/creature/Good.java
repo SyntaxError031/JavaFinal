@@ -18,6 +18,7 @@ public abstract class Good extends Creature {
                     System.out.print(this.toString() + " atk " + c.toString());
                     bf.drawAttack(canvas, this, c);
                     c.setHp(c.getHp() - atkPoint);
+
                     System.out.println(",伤害 " + atkPoint + ",余血 " + c.getHp());
                     if (c.getHp() <= 0) {
                         c.setStatus(Status.DEAD);

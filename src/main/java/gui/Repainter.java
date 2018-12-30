@@ -58,9 +58,10 @@ public class Repainter implements Runnable{
 
 
         for (int i = 0; i < logs.size() - 1; i++) {
+
             Pattern pattern = Pattern.compile("(?<=\\()[^\\)]+");
             Matcher matcher = pattern.matcher(logs.get(i));
-            while(matcher.find()){
+            while (matcher.find()) {
                 //System.out.println(matcher.group());
                 String[] as = matcher.group().split(",");
                 int x = Integer.valueOf(as[1]), y = Integer.valueOf(as[2]);
@@ -68,28 +69,39 @@ public class Repainter implements Runnable{
                 //System.out.println(as[0] + " " + x + " " + y + " " + length);
                 switch (as[0]) {
                     case "大娃":
-                        gc.drawImage(new Image("1.png"), x * 85,y * 85); break;
+                        gc.drawImage(new Image("1.png"), x * 85, y * 85);
+                        break;
                     case "二娃":
-                        gc.drawImage(new Image("2.png"), x * 85,y * 85); break;
+                        gc.drawImage(new Image("2.png"), x * 85, y * 85);
+                        break;
                     case "三娃":
-                        gc.drawImage(new Image("3.png"), x * 85,y * 85); break;
+                        gc.drawImage(new Image("3.png"), x * 85, y * 85);
+                        break;
                     case "四娃":
-                        gc.drawImage(new Image("4.png"), x * 85,y * 85); break;
+                        gc.drawImage(new Image("4.png"), x * 85, y * 85);
+                        break;
                     case "五娃":
-                        gc.drawImage(new Image("5.png"), x * 85,y * 85); break;
+                        gc.drawImage(new Image("5.png"), x * 85, y * 85);
+                        break;
                     case "六娃":
-                        gc.drawImage(new Image("6.png"), x * 85,y * 85); break;
+                        gc.drawImage(new Image("6.png"), x * 85, y * 85);
+                        break;
                     case "七娃":
-                        gc.drawImage(new Image("7.png"), x * 85,y * 85); break;
+                        gc.drawImage(new Image("7.png"), x * 85, y * 85);
+                        break;
                     case "爷爷":
-                        gc.drawImage(new Image("grandpa.png"), x * 85,y * 85); break;
+                        gc.drawImage(new Image("grandpa.png"), x * 85, y * 85);
+                        break;
                     case "蛇精":
-                        gc.drawImage(new Image("snake.png"), x * 85,y * 85); break;
+                        gc.drawImage(new Image("snake.png"), x * 85, y * 85);
+                        break;
                     case "蝎子":
-                        gc.drawImage(new Image("scorpion.png"), x * 85,y * 85); break;
+                        gc.drawImage(new Image("scorpion.png"), x * 85, y * 85);
+                        break;
                     default: {
                         gc.drawImage(new Image("loluo.png"), x * 85, y * 85);
-                    }break;
+                    }
+                    break;
                 }
                 gc.setFill(Color.GREEN);
                 gc.fillRect(x * 85, y * 85, length, 5);

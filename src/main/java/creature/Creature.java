@@ -19,7 +19,6 @@ public abstract class Creature implements Runnable{
     protected int y;
     static protected BattleField bf;
     static protected Canvas canvas;
-    //protected File file;
 
     public int getHp() { return hp; }
     public int getFullHp() { return fullHp; }
