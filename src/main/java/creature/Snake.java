@@ -7,6 +7,7 @@ public class Snake extends Bad {
     public Snake() {
         hp = 150;
         atkPoint = 60;
+        fullHp = 150;
     }
 
     public Image getImage() {

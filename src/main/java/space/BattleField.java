@@ -7,6 +7,7 @@ import creature.Status;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class BattleField {
 
@@ -14,6 +15,8 @@ public class BattleField {
     private int row;
     private int col;
     private final int BLOCK_SIZE = 85;
+    public boolean isEnd = false;
+    public boolean win = false;
 
     public BattleField(int row, int col) {
         blocks = new Block[row][col];
@@ -36,13 +39,47 @@ public class BattleField {
             for (int j = 0; j < col; j++) {
                 if ((creatureInblock = blocks[i][j].getCreature()) != null) {
                     //System.out.println("draw image on " + i + " " + j);
-                    if (creatureInblock.getStatus() != Status.DEAD)
+                    if (creatureInblock.getStatus() != Status.DEAD) {
                         gc.drawImage(creatureInblock.getImage(), j * BLOCK_SIZE, i * BLOCK_SIZE);
-                    else
+                        // 画血条
+                        double length = creatureInblock.getHp()*1.0 / creatureInblock.getFullHp() * BLOCK_SIZE;
+                        gc.setFill(Color.GREEN);
+                        gc.fillRect(j * BLOCK_SIZE, i * BLOCK_SIZE, length, 5);
+                    }
+                    else {
                         gc.drawImage(new Image("grave.png"), j * BLOCK_SIZE, i * BLOCK_SIZE);
+                        blocks[i][j].eraseCreature();
+                    }
                 }
             }
         }
+
+        boolean flag = true;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (blocks[i][j].getCreature() != null) {
+                    if (blocks[i][j].getCreature().getStatus() != Status.STOP && blocks[i][j].getCreature().getStatus() != Status.DEAD)
+                        flag = false;
+                }
+            }
+        }
+        isEnd = flag;
+
+        if (isEnd) {
+            if (win) {
+                gc.drawImage(new Image("victory.png"), 130, 140);
+            }
+            else
+                gc.drawImage(new Image("defeat.png"), 100, 78);
+        }
+    }
+
+    public void drawAttack(Canvas canvas, Creature a, Creature b) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setStroke(Color.RED);
+        gc.setLineWidth(3);
+        gc.strokeLine((a.getX() * BLOCK_SIZE + BLOCK_SIZE / 2), (a.getY() * BLOCK_SIZE + BLOCK_SIZE / 2),
+                (b.getX() * BLOCK_SIZE + BLOCK_SIZE / 2), (b.getY() * BLOCK_SIZE + BLOCK_SIZE / 2));
     }
 
     /**
@@ -92,4 +129,5 @@ public class BattleField {
     public void eraseCreature(int x, int y) {
         blocks[y][x].eraseCreature();
     }
+
 }

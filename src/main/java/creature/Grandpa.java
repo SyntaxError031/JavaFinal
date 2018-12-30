@@ -7,6 +7,7 @@ public class Grandpa extends Good {
     public Grandpa() {
         hp = 60;
         atkPoint = 10;
+        fullHp = 60;
     }
 
     @Override

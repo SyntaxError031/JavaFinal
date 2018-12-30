@@ -7,6 +7,7 @@ public class Yellow extends Good {
     public Yellow() {
         hp = 150;
         atkPoint = 30;
+        fullHp = 150;
     }
 
     @Override

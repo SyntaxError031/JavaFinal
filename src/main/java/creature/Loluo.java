@@ -10,6 +10,7 @@ public class Loluo extends Bad {
         hp = 60;
         atkPoint = 20;
         index = i;
+        fullHp = 60;
     }
 
     public Image getImage() {

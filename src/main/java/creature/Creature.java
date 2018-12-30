@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class Creature implements Runnable{
     protected int hp;
+    protected int fullHp;
     protected int atkPoint;
     protected Status status = Status.LIVING;
     protected int x;
@@ -20,6 +21,7 @@ public abstract class Creature implements Runnable{
     static protected Canvas canvas;
 
     public int getHp() { return hp; }
+    public int getFullHp() { return fullHp; }
     public int getAtkPoint() { return atkPoint; }
     public Status getStatus() { return status; }
     public void setStatus(Status status) { this.status = status; }
@@ -44,7 +46,7 @@ public abstract class Creature implements Runnable{
         Random random = new Random();
         int direction = random.nextInt(4);
 
-        if (this.getStatus() == Status.DEAD)
+        if (this.getStatus() == Status.DEAD || this.getStatus() == Status.STOP)
             return;
 
         synchronized (bf) {
@@ -83,10 +85,16 @@ public abstract class Creature implements Runnable{
             System.out.println(this.toString() + " has moved");
             bf.setCreature(this, x, y);
             //bf.drawBattleField(canvas);
+            if (hasAliveBad() && !hasAliveGood())
+                status = Status.STOP;
+            if (hasAliveGood() && !hasAliveBad()) {
+                status = Status.STOP;
+                bf.win = true;
+            }
 
         }
         try {
-            TimeUnit.MILLISECONDS.sleep(1000);
+            TimeUnit.MILLISECONDS.sleep(2000);
         } catch (InterruptedException e) {
             System.out.println("interrupted");
         }
@@ -95,7 +103,7 @@ public abstract class Creature implements Runnable{
     protected void attack() {}
 
     public void run() {
-        while (hasAliveCreature()) {
+        while (!bf.isEnd) {
             move();
             attack();
         }
@@ -116,10 +124,20 @@ public abstract class Creature implements Runnable{
         return attackList;
     }
 
-    protected boolean hasAliveCreature() {
+    protected boolean hasAliveGood() {
         for (int i = 0; i < bf.getRow(); i++)
             for (int j = 0; j < bf.getCol(); j++)
-                if (bf.getCreature(j, i) != null && bf.getCreature(j, i).getStatus() != Status.DEAD)
+                if (bf.getCreature(j, i) != null && bf.getCreature(j, i).getStatus() != Status.DEAD
+                        && bf.getCreature(j, i) instanceof Good)
+                    return true;
+        return false;
+    }
+
+    protected boolean hasAliveBad() {
+        for (int i = 0; i < bf.getRow(); i++)
+            for (int j = 0; j < bf.getCol(); j++)
+                if (bf.getCreature(j, i) != null && bf.getCreature(j, i).getStatus() != Status.DEAD
+                        && bf.getCreature(j, i) instanceof Bad)
                     return true;
         return false;
     }

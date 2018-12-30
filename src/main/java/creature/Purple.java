@@ -7,6 +7,7 @@ public class Purple extends Good {
     public Purple() {
         hp = 100;
         atkPoint = 50;
+        fullHp = 100;
     }
 
     @Override

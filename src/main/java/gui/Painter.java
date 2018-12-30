@@ -18,7 +18,7 @@ public class Painter implements Runnable {
 
     public void run() {
 
-        while (true) {
+        while (!battleField.isEnd) {
             synchronized (battleField) {
                 battleField.drawBattleField(canvas);
                 System.out.println("draw battlefield");

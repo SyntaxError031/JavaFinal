@@ -7,6 +7,7 @@ public class Scorpion extends Bad {
     public Scorpion() {
         hp = 100;
         atkPoint = 50;
+        fullHp = 100;
     }
 
     public Image getImage() {

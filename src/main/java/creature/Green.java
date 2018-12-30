@@ -7,6 +7,7 @@ public class Green extends Good {
     public Green() {
         hp = 100;
         atkPoint = 50;
+        fullHp = 100;
     }
 
     @Override
