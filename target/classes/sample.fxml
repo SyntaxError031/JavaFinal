@@ -7,13 +7,15 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<GridPane fx:id="pane" alignment="center" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-          minWidth="-Infinity" onKeyPressed="#handleKeyPress" styleClass="background" stylesheets="@sample.css"
-          xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
+<GridPane fx:id="pane" alignment="center" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress" styleClass="background" stylesheets="@sample.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
 
     <VBox alignment="center" focusTraversable="true" prefHeight="700" prefWidth="100" spacing="20" GridPane.columnIndex="0" GridPane.rowIndex="0">
-        <Label text="葫芦娃阵形" />
+        <Label text="葫芦娃" textFill="#adcd1e">
+         <font>
+            <Font name="Microsoft YaHei" size="30.0" />
+         </font></Label>
         <Button focusTraversable="false" onAction="#goodChangShe" text="长蛇" />
         <Button focusTraversable="false" onAction="#goodChongE" text="冲轭" />
         <Button focusTraversable="false" onAction="#goodFangYuan" text="方円" />
@@ -26,7 +28,10 @@
 
 
     <VBox alignment="center" focusTraversable="true" prefHeight="700" prefWidth="100" spacing="20" GridPane.columnIndex="2" GridPane.rowIndex="0">
-        <Label text="妖怪阵形" />
+        <Label text="妖怪" textFill="#adcd1e">
+         <font>
+            <Font name="Microsoft YaHei" size="30.0" />
+         </font></Label>
         <Button focusTraversable="false" onAction="#badChangShe" text="长蛇" />
         <Button focusTraversable="false" onAction="#badChongE" text="冲轭" />
         <Button focusTraversable="false" onAction="#badFangYuan" text="方円" />

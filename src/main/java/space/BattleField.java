@@ -9,6 +9,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class BattleField {
 
     private Block[][] blocks;
@@ -17,6 +21,8 @@ public class BattleField {
     private final int BLOCK_SIZE = 85;
     public boolean isEnd = false;
     public boolean win = false;
+    public boolean isStart = false;
+    private File file;
 
     public BattleField(int row, int col) {
         blocks = new Block[row][col];
@@ -35,6 +41,7 @@ public class BattleField {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         Creature creatureInblock;
+        String data = "";
         for(int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if ((creatureInblock = blocks[i][j].getCreature()) != null) {
@@ -45,6 +52,9 @@ public class BattleField {
                         double length = creatureInblock.getHp()*1.0 / creatureInblock.getFullHp() * BLOCK_SIZE;
                         gc.setFill(Color.GREEN);
                         gc.fillRect(j * BLOCK_SIZE, i * BLOCK_SIZE, length, 5);
+                        if (isStart) {
+                            data += "(" + creatureInblock.toString() + "," + j + "," + i + "," + length + ")";
+                        }
                     }
                     else {
                         gc.drawImage(new Image("grave.png"), j * BLOCK_SIZE, i * BLOCK_SIZE);
@@ -53,6 +63,8 @@ public class BattleField {
                 }
             }
         }
+
+        data += "\r\n";
 
         boolean flag = true;
         for (int i = 0; i < row; i++) {
@@ -68,9 +80,23 @@ public class BattleField {
         if (isEnd) {
             if (win) {
                 gc.drawImage(new Image("victory.png"), 130, 140);
+                data += "Win";
             }
-            else
+            else {
                 gc.drawImage(new Image("defeat.png"), 100, 78);
+                data += "Defeat";
+            }
+        }
+
+        try {
+            File file = new File("game.log");
+            if (!file.exists())
+                file.createNewFile();
+            FileWriter fileWriter = new FileWriter(file.getName(),true);
+            fileWriter.write(data);
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

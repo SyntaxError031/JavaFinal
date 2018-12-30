@@ -19,6 +19,7 @@ public abstract class Creature implements Runnable{
     protected int y;
     static protected BattleField bf;
     static protected Canvas canvas;
+    //protected File file;
 
     public int getHp() { return hp; }
     public int getFullHp() { return fullHp; }
@@ -82,6 +83,8 @@ public abstract class Creature implements Runnable{
                     y += 2;
                 }
             }
+
+
             System.out.println(this.toString() + " has moved");
             bf.setCreature(this, x, y);
             //bf.drawBattleField(canvas);
@@ -116,7 +119,8 @@ public abstract class Creature implements Runnable{
 
         for (int i = yMin; i <= yMax; i++) {
             for (int j = xMin; j <= xMax; j++) {
-                if (x != j && y != i && bf.getCreature(j, i) != null && bf.getCreature(j, i).getStatus() != Status.DEAD)
+                if (x != j && y != i && bf.getCreature(j, i) != null && bf.getCreature(j, i).getStatus() != Status.DEAD &&
+                        bf.getCreature(j, i).getStatus() != Status.STOP)
                     attackList.add(bf.getCreature(j, i));
             }
         }
